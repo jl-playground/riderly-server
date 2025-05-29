@@ -20,7 +20,7 @@ env:
 jobs:
   build-and-deploy:
     # Only run on merged pull request
-    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+    if: startsWith(github.event.head_commit.message, 'Merge pull request')
     runs-on: self-hosted
     name: Build and Deploy to Kubernetes
 
