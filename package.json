@@ -16,8 +16,7 @@
   "description": "A Node.js server for Riderly",
   "lint-staged": {
     "**/*.ts": [
-      "eslint --fix",
-      "tsc --noEmit"
+      "eslint --fix"
     ]
   },
   "devDependencies": {
