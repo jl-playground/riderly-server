@@ -1,25 +1,25 @@
-import { Table, Model, Column, PrimaryKey, Default, HasMany, DataType } from "sequelize-typescript";
-import { Route } from "../route/route.model";
-import { Alert } from "../alert/alert.model";
-import { Motorcycle } from "../motorcycle/motorcycle.model";
+import { Table, Model, Column, PrimaryKey, Default, HasMany, DataType } from 'sequelize-typescript';
+import { CreationOptional, InferAttributes, InferCreationAttributes, CreateOptions } from 'sequelize';
+import { Route } from '../route/route.model';
+import { Alert } from '../alert/alert.model';
+import { Motorcycle } from '../motorcycle/motorcycle.model';
 
 @Table({
-  tableName: "user",
-  timestamps: true, // Enable createdAt and updatedAt fields
-  underscored: true, // Use snake_case for column names
+  tableName: 'user',
+  timestamps: true,
+  underscored: true,
 })
-export class User extends Model {
+export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
-  uuid!: string;
+  uuid?: CreationOptional<string>; // Optional when creating
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    unique: true, // Ensure username is unique
     validate: {
-      len: [3, 50], // Username must be between 3 and 50 characters
+      len: [3, 50],
     },
   })
   username!: string;
@@ -27,10 +27,10 @@ export class User extends Model {
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    unique: true, // Ensure email is unique
+    unique: true,
     validate: {
-      isEmail: true, // Validate email format
-      len: [5, 255], // Email must be between 5 and 255 characters
+      isEmail: true,
+      len: [5, 255],
     },
   })
   email!: string;
@@ -39,17 +39,17 @@ export class User extends Model {
     type: DataType.STRING,
     allowNull: false,
     validate: {
-      len: [4, 100], // Password must be between 8 and 100 characters
+      len: [4, 100],
     },
   })
   password!: string;
 
   @HasMany(() => Route)
-  routes!: Route[];
+  routes?: Route[];
 
   @HasMany(() => Alert)
-  alerts!: Alert[];
+  alerts?: Alert[];
 
   @HasMany(() => Motorcycle)
-  motorcycles!: Motorcycle[];
+  motorcycles?: Motorcycle[];
 }

@@ -12,7 +12,6 @@ export const up: MigrationFn<QueryInterface> = async ({ context: queryInterface 
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     email: {
       type: DataTypes.STRING,
