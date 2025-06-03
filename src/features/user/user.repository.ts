@@ -9,4 +9,4 @@ export async function findUserById(id: string) {
   return await User.findByPk(id);
 }
 
-export const createUser = (userData: CreateUserDto) => User.create(userData);
+export const createUser = (userData: CreateUserDto): Promise<User> => User.create(userData);

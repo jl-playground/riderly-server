@@ -1,6 +1,5 @@
 import * as userRepo from './user.repository';
 import type { CreateUserDto, NewUserData, UserDto, UserResponseDto } from './types';
-import type { User } from './user.model';
 import bcrypt from 'bcrypt';
 import { generateToken } from '../../utils/jwt';
 
@@ -33,7 +32,7 @@ export const createUserService = async (userData: CreateUserDto): Promise<string
 
     return generateToken(paylaod); // Generate a token valid for 1 day
   } catch (error) {
-    return Promise.reject(new Error(`[Error] in user.service createUserService: ${error}`));
+    return Promise.reject(new Error(`[Error] in user.service createUserService: `));
   }
 };
 
